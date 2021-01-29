@@ -1,3 +1,4 @@
+<!-- テーブル名の命名規則複数形 -->
 # usersテーブル
 | Column                    | Type        | Option            |
 |:--------------------------|------------:|:-----------------:|
@@ -13,7 +14,7 @@
 <!-- deviseのでの実装なのでdeviseが予め用意しているencrypted_passwordにする -->
 <!-- 誕生日カラムはdate型で用意したほうが簡単。dateは年月日を１つで指定して取得できるから -->
 <!-- なぜ has_many :buyers？-->
-##association user
+## association users
 has_many :comments
 has_many :items
 
@@ -36,7 +37,7 @@ has_one :buy_mane
 <!-- imageカラムは削除アクティブストレージ使うから -->
 <!-- references型で描くときはカラム名の_idは不要 -->
 
-## association item
+## association items
 has_many :comments
 belongs_to :user
 
@@ -45,7 +46,7 @@ has_one :buy_mane
 
 
 
-# commentテーブル
+# commentsテーブル
 | Column     | Type        | Option           |
 |:-----------|------------:|:----------------:|
 | comment    | text        | null: false      |
@@ -54,12 +55,12 @@ has_one :buy_mane
 
 <!-- references型で記述するときは_idは不要 -->
 
-## association comment
+## association comments
 belongs_to :user
 belongs_to :item
 ----------------------------------------------------------
 <!-- 購入を管理するテーブルmaneはmanegement -->
-# buy_mane テーブル 
+# buy_manes テーブル 
 | Column     | Type        | Option           |
 |:-----------|------------:|:----------------:|
 | user       | references  | foreign_key: true|
@@ -67,14 +68,14 @@ belongs_to :item
 
 <!-- references型で記述するときは_idは不要 -->
 
-## association buy_mane
+## association buy_manes
 
 belongs_to :user
 belongs_to :item
 has_one :buyer_home
 ----------------------------------------------------------
 
-## buyer_home
+## buyer_homes
 | Column                   | Type                    | Option                  |
 |:------------------------:|:------------------------|------------------------:|
 | post_num                 | string                  | null: false             |
@@ -88,7 +89,7 @@ has_one :buyer_home
 <!-- buyer_homeにbuy_maneの外部キーを参照するカラム必要 -->
 <!-- post_numはハイフンが必要なことを考慮してstring型にする -->
 <!-- phone_numは数字の文字列として実装するためstring型で実装 -->
-## association
+## association buyer_homes
  
  belongs_to :buy_mane 
 -------------------------------------------------------------- 
