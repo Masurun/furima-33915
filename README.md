@@ -1,4 +1,5 @@
 <!-- テーブル名の命名規則複数形 -->
+<!-- クレカの情報はセキュリティ観点から直接データベースに保存しない -->
 # usersテーブル
 | Column                    | Type        | Option            |
 |:--------------------------|------------:|:-----------------:|
@@ -13,12 +14,12 @@
 <!-- 新規登録のときはすべて同じテーブルに保存される -->
 <!-- deviseのでの実装なのでdeviseが予め用意しているencrypted_passwordにする -->
 <!-- 誕生日カラムはdate型で用意したほうが簡単。dateは年月日を１つで指定して取得できるから -->
-<!-- なぜ has_many :buyers？-->
+<!--一人のユーザーは複数回購入する、複数の注文履歴が紐づくのでhas_many-->
 ## association users
 has_many :comments
 has_many :items
 
-has_one :buy_mane
+has_many: buy_manes
 ------------------------------------------------------
 
 # itemsテーブル
@@ -29,7 +30,7 @@ has_one :buy_mane
 | category_id         | integer     | null: false       | 
 | status_id           | integer     | null: false       |
 | deliver_burden_id   | integer     | null: false       |
-| deliver_region_id   | integer     | null: false       |
+| pref_id             | integer     | null: false       |
 | deliver_date_id     | integer     | null: false       |
 | sell_price          | integer     | null: false       |
 | user                | references  | foreign_key: true |
@@ -93,46 +94,3 @@ has_one :buyer_home
  
  belongs_to :buy_mane 
 -------------------------------------------------------------- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 後で聞く 今は必要 -->
-<!-- これを消したらbuyer_idはどこから参照される？ -->
-<!-- # buyerテーブル
-| Column          | Type                    | Option                  |
-|:----------------|------------------------:|:-----------------------:|
-| item            | references              | foreign_key: true       |
-| user            | references              | foreign_key: true       |
-<!-- クレカの情報はセキュリティ観点から直接データベースに保存しない -->
-<!-- references型で記述するときは_idは不要 -->
-<!-- ## association buyer
-belongs_to :item
-belongs_to :user
-has_one :buy_mane --> -->
