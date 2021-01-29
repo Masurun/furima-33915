@@ -62,7 +62,7 @@ belongs_to :item
 # buy_mane テーブル 
 | Column     | Type        | Option           |
 |:-----------|------------:|:----------------:|
-| buyer      | references  | foreign_key: true|
+| user       | references  | foreign_key: true|
 | item       | references  | foreign_key: true|
 
 <!-- references型で記述するときは_idは不要 -->
