@@ -12,11 +12,11 @@
 <!-- 新規登録のときはすべて同じテーブルに保存される -->
 <!-- deviseのでの実装なのでdeviseが予め用意しているencrypted_passwordにする -->
 <!-- 誕生日カラムはdate型で用意したほうが簡単。dateは年月日を１つで指定して取得できるから -->
-
+<!-- なぜ has_many :buyers？-->
 ##association user
 has_many :comments
 has_many :items
-has_one :buyer
+has_many :buyers
 ------------------------------------------------------
 
 # itemsテーブル
@@ -92,15 +92,15 @@ has_one :buyer_home
 -------------------------------------------------------------- 
 
 
-
-# buyerテーブル
+<!-- これを消したらbuyer_idはどこから参照される？ -->
+<!-- # buyerテーブル
 | Column          | Type                    | Option                  |
 |:----------------|------------------------:|:-----------------------:|
 | item            | references              | foreign_key: true       |
 | user            | references              | foreign_key: true       |
 <!-- クレカの情報はセキュリティ観点から直接データベースに保存しない -->
 <!-- references型で記述するときは_idは不要 -->
-## association buyer
+<!-- ## association buyer
 belongs_to :item
 belongs_to :user
-has_one :buy_mane
+has_one :buy_mane --> -->
