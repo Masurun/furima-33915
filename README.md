@@ -16,7 +16,8 @@
 ##association user
 has_many :comments
 has_many :items
-has_many :buyers
+
+has_one :buy_mane
 ------------------------------------------------------
 
 # itemsテーブル
@@ -57,8 +58,8 @@ has_one :buy_mane
 belongs_to :user
 belongs_to :item
 ----------------------------------------------------------
-
-# buy_mane テーブル
+<!-- 購入を管理するテーブルmaneはmanegement -->
+# buy_mane テーブル 
 | Column     | Type        | Option           |
 |:-----------|------------:|:----------------:|
 | buyer      | references  | foreign_key: true|
@@ -67,7 +68,8 @@ belongs_to :item
 <!-- references型で記述するときは_idは不要 -->
 
 ## association buy_mane
-belongs_to :buyer
+
+belongs_to :user
 belongs_to :item
 has_one :buyer_home
 ----------------------------------------------------------
@@ -76,7 +78,7 @@ has_one :buyer_home
 | Column                   | Type                    | Option                  |
 |:------------------------:|:------------------------|------------------------:|
 | post_num                 | string                  | null: false             |
-| pref                     | string                  | null: false             |
+| pref_id                  | integer                  | null: false            |
 | city                     | string                  | null: false             |
 | street                   | string                  | null: false             |
 | building                 | string                  |                         |
@@ -92,6 +94,35 @@ has_one :buyer_home
 -------------------------------------------------------------- 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 後で聞く 今は必要 -->
 <!-- これを消したらbuyer_idはどこから参照される？ -->
 <!-- # buyerテーブル
 | Column          | Type                    | Option                  |
