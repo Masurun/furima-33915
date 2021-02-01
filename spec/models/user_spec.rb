@@ -35,6 +35,12 @@ RSpec.describe User, type: :model do
       user.valid?
       expect(user.errors.full_messages).to include('Password is invalid')
     end
+    it 'passwordが6文字以上でなければ保存できない' do
+      user = User.new(nickname: 'a', email: 'test@example', password: '11a', password_confirmation: '11a', first_name: 'やまだ',
+                      last_name: '太郎', first_name_kana: 'ヤマダ', last_name_kana: 'タロウ', birth: '1996-12-23')
+      user.valid?
+      expect(user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+    end
     it 'password_confimationが空では保存できない' do
       user = User.new(nickname: 'a', email: 'test@example', password: 'a111111', password_confirmation: '', first_name: 'ヤマダ',
                       last_name: '太郎', first_name_kana: 'ヤマダ', last_name_kana: 'タロウ', birth: '1996-12-23')
@@ -90,6 +96,11 @@ RSpec.describe User, type: :model do
                       last_name: '太郎', first_name_kana: 'ヤマダ', last_name_kana: '', birth: '1996-12-23')
       user.valid?
       expect(user.errors.full_messages).to include("Last name kana can't be blank", 'Last name kana is invalid')
+    end
+    it 'すべての情報が登録できること' do
+      user = User.new(nickname: 'a', email: 'test@example', password: 'a000000', password_confirmation: 'a000000', first_name: 'やまだ',
+                      last_name: '太郎', first_name_kana: 'ヤマダ', last_name_kana: 'タロウ', birth: '1996-12-23')
+      expect(user).to be_valid
     end
   end
 end
