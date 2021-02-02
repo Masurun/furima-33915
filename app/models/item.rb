@@ -24,6 +24,8 @@ class Item < ApplicationRecord
     
   end
   validates :sell_price,numericality:{only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
+  validates :name,length:{maximum:40}
+  validates :description,length:{maximum:1000}
   belongs_to :user
   has_one_attached :image
 end
