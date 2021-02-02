@@ -37,25 +37,50 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category is not a number", "Category can't be blank") 
       end
+      it "category_idが1以外でないと登録できないこと" do
+        @item.category_id="1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1") 
+      end
       it "status_idが空では保存できない" do
         @item.status_id=""
         @item.valid?
         expect(@item.errors.full_messages).to include("Status is not a number", "Status can't be blank")
+      end
+      it "status_idが1以外でないと登録できないこと" do
+        @item.status_id="1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
       it "deliver_burden_idが空では保存できない" do
         @item.deliver_burden_id=""
         @item.valid?
         expect(@item.errors.full_messages).to include("Deliver burden is not a number", "Deliver burden can't be blank") 
       end
+      it "deliver_burden_idが1以外でないと登録できないこと" do
+        @item.deliver_burden_id="1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Deliver burden must be other than 1") 
+      end
       it "pref_idが空では保存できない" do
         @item.pref_id=""
         @item.valid?
         expect(@item.errors.full_messages).to include("Pref is not a number", "Pref can't be blank")
       end
+      it "pref_idが1以外でないと登録できないこと" do
+        @item.pref_id="1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Pref must be other than 1")
+      end
       it "deliver_date_idが空では保存できない" do
         @item.deliver_date_id=""
         @item.valid?
         expect(@item.errors.full_messages).to include("Deliver date is not a number", "Deliver date can't be blank")
+      end
+      it "delivery_date_idが1以外でないと登録できないこと" do
+        @item.deliver_date_id="1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Deliver date must be other than 1")
       end
       it "sell_priceが空では保存できない" do
         @item.sell_price=""
@@ -82,12 +107,26 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Sell price must be an integer")
       end
+      it "sell_priceが全角文字では登録できないこと" do
+        @item.sell_price="テスト"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Sell price is not a number")
+      end
+      it "sell_priceが半角英数混合では登録できないこと" do
+        @item.sell_price="123abc"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Sell price is not a number")
+      end
+      it "sell_priceが半角英語だけでは登録できないこと" do
+        @item.sell_price="test"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Sell price is not a number")
+      end
     end
     context "商品出品機能が正常に挙動する時" do
       it "すべての情報が登録できる時" do
         expect(@item).to be_valid
-      end
     end
- 
+    end
   end
 end
