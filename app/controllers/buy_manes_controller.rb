@@ -1,8 +1,9 @@
 class BuyManesController < ApplicationController
   before_action :item_params,only:[:index,:create]
   before_action :move_to_index,only:[:index,:create]
+  before_action :authenticate_user!,only:[:index,:create]
 def index
-  if @item.user_id==current_user.id &&  @item.buy_mane != nil
+  if @item.user_id==current_user.id
     redirect_to root_path
   end
   @buy_mane_buyer_home=BuyManeBuyerHome.new

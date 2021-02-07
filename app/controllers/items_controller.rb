@@ -33,10 +33,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.buy_mane != nil
-      redirect_to root_path
-    end
-    if @item.user_id!=current_user.id
+    if @item.buy_mane != nil || @item.user_id!=current_user.id
       redirect_to root_path
     end
   end
