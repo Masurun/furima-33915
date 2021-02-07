@@ -5,7 +5,7 @@ RSpec.describe BuyManeBuyerHome , type: :model do
     @user=FactoryBot.create(:user)
     @item=FactoryBot.create(:item)
     sleep 0.5
-    @buy_mane_buyer_home=FactoryBot.build(:buy_mane_buyer_home, @user_id: :user,@item_id: :item)
+    @buy_mane_buyer_home=FactoryBot.build(:buy_mane_buyer_home, user_id: :user,item_id: :item)
   end
   
   describe "商品購入機能" do
