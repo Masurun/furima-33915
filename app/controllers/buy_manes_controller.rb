@@ -12,8 +12,8 @@ def create
   @buy_mane_buyer_home=BuyManeBuyerHome.new(buy_mane_params)
 
   if @buy_mane_buyer_home.valid?
-    @buy_mane_buyer_home.save
     pay_item
+    @buy_mane_buyer_home.save
     redirect_to root_path
   else
     render :index

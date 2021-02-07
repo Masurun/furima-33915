@@ -2,8 +2,12 @@ require 'rails_helper'
 
 RSpec.describe BuyManeBuyerHome , type: :model do
   before do
-    @buy_mane_buyer_home=FactoryBot.build(:buy_mane_buyer_home)
+    @user=FactoryBot.create(:user)
+    @item=FactoryBot.create(:item)
+    sleep 0.5
+    @buy_mane_buyer_home=FactoryBot.build(:buy_mane_buyer_home, user_id: :user,item_id: :item)
   end
+  
   describe "商品購入機能" do
     context "商品購入機能が正常に挙動しない時" do
       it "post_numが空では保存できない" do
@@ -27,7 +31,7 @@ RSpec.describe BuyManeBuyerHome , type: :model do
         expect(@buy_mane_buyer_home.errors.full_messages).to include("Pref is not a number")
       end
       it "pref_idが1以外でないと登録できないこと" do
-        @buy_mane_buyer_home.pref_id="1"
+        @buy_mane_buyer_home.pref_id=1
         @buy_mane_buyer_home.valid?
         expect(@buy_mane_buyer_home.errors.full_messages).to include("Pref must be other than 1")
       end
@@ -66,12 +70,26 @@ RSpec.describe BuyManeBuyerHome , type: :model do
         @buy_mane_buyer_home.valid?
        expect(@buy_mane_buyer_home.errors.full_messages).to include("Token can't be blank")
       end
+      it "user_idが空では保存できない" do
+        @buy_mane_buyer_home.user_id=nil
+        @buy_mane_buyer_home.valid?
+       expect(@buy_mane_buyer_home.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idが空では保存できない" do
+        @buy_mane_buyer_home.item_id=nil
+        @buy_mane_buyer_home.valid?
+       expect(@buy_mane_buyer_home.errors.full_messages).to include("Item can't be blank")
+      end
     end
       context "商品購入機能が正常に挙動する時" do
         it "すべての情報が登録できる時" do
         expect(@buy_mane_buyer_home).to be_valid
-      end
-      
+      end 
+        it "buildingの情報が空の状態でも購入できる" do
+          @buy_mane_buyer_home.building=""
+          expect(@buy_mane_buyer_home).to be_valid
+        end
     end
+
   end
 end
