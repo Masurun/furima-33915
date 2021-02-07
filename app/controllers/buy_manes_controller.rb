@@ -3,9 +3,7 @@ class BuyManesController < ApplicationController
   before_action :move_to_index,only:[:index,:create]
   before_action :authenticate_user!,only:[:index,:create]
 def index
-  if @item.user_id==current_user.id
-    redirect_to root_path
-  end
+  
   @buy_mane_buyer_home=BuyManeBuyerHome.new
 end
 
@@ -37,10 +35,8 @@ def pay_item
   )
 end
 def move_to_index
-  unless user_signed_in? && @item.buy_mane == nil
+  if @item.user_id==current_user.id &&  @item.buy_mane != nil
     redirect_to root_path
-  end
-  
-
+   end
 end
 end
