@@ -1,7 +1,7 @@
 class BuyManesController < ApplicationController
   before_action :item_params,only:[:index,:create]
-  before_action :move_to_index,only:[:index,:create]
   before_action :authenticate_user!,only:[:index,:create]
+  before_action :move_to_index,only:[:index,:create]
 def index
   
   @buy_mane_buyer_home=BuyManeBuyerHome.new
@@ -35,7 +35,7 @@ def pay_item
   )
 end
 def move_to_index
-  if @item.user_id==current_user.id &&  @item.buy_mane != nil
+  if @item.user_id==current_user.id ||  @item.buy_mane != nil
     redirect_to root_path
    end
 end
