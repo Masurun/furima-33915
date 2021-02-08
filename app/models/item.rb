@@ -31,4 +31,5 @@ class Item < ApplicationRecord
   validates :description,length:{maximum:1000}
   belongs_to :user
   has_one_attached :image
+  has_one :buy_mane
 end
